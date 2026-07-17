@@ -1,12 +1,12 @@
-# Security and safety boundary
+# 安全与使用边界
 
-This repository is an educational tabletop prototype, not road infrastructure.
+本仓库是桌面教学原型，不是道路基础设施。
 
-- The HTTP, MJPEG and WebSocket interfaces have no authentication or TLS. The backend binds to loopback by default. Use LAN binding only on an isolated trusted teaching network.
-- Wi-Fi credentials, camera addresses and the backend LAN address belong in ignored local configuration, never in Git.
-- `/health` proves only that the FastAPI process responds. `/api/runtime` reports observed frame freshness and WebSocket client counts; neither endpoint certifies cameras, inference, the physical controller, light outputs, traffic optimization or road safety.
-- A connected WebSocket client is not proof that a physical ESP32, LED or OLED is healthy. The current protocol has no authenticated device identity, command acknowledgement or light-state feedback.
-- The ESP32 main firmware requests all-red when its WebSocket disconnects. This is a source-confirmed prototype behavior, not a certified safety mechanism. There is no hardware interlock, conflict monitor, watchdog relay or redundant controller.
-- Do not expose the services to the public Internet and do not deploy this software to real road traffic.
+- HTTP、MJPEG 和 WebSocket 接口均无认证和 TLS。后端默认绑定本机；只有在隔离且可信的教学网络中才应启用局域网绑定。
+- Wi-Fi 凭据、摄像头地址与后端局域网地址应写入被忽略的本地配置，绝不能提交到 Git。
+- `/health` 只证明 FastAPI 进程响应；`/api/runtime` 只报告观察到的视频帧新鲜度和 WebSocket 客户端数量。两者都不能证明摄像头、推理、实体控制器、灯光输出、交通优化或道路安全。
+- WebSocket 已连接不代表实体 ESP32、LED 或 OLED 正常。当前协议没有认证设备身份、命令确认或灯光状态反馈。
+- 主控 ESP32 源码会在 WebSocket 断开时请求全红。这是源码可确认的原型行为，不是认证安全机制；系统没有硬件互锁、冲突监测、看门狗继电器或冗余控制器。
+- 不要将服务暴露到公网，也不要把本软件部署到真实道路交通环境。
 
-Please report a vulnerability through GitHub's private security advisory feature rather than a public issue when possible. Do not include credentials or private network details in a report.
+报告安全问题时，优先使用 GitHub 私有安全公告，不要在公开 Issue 中提交凭据或私有网络信息。

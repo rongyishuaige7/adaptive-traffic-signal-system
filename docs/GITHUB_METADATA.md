@@ -1,6 +1,6 @@
-# GitHub metadata
+# GitHub 元数据
 
-- **Repository:** `adaptive-traffic-signal-system`
-- **Description:** `Educational adaptive traffic-signal prototype with four ESP32-CAM streams, YOLOv8 vehicle counting, FastAPI, Vue 3, and an ESP32 light controller.`
-- **Topics:** `esp32`, `esp32-cam`, `yolov8`, `fastapi`, `vue3`, `websocket`, `computer-vision`, `traffic-signal`, `iot`, `hardware-project`
-- **Default branch:** `main`
+- **仓库：** `adaptive-traffic-signal-system`
+- **简介：** `四路 ESP32-CAM + YOLOv8 车流统计、FastAPI/Vue 3 工作台与 ESP32 交通灯控制器组成的桌面教学原型。`
+- **Topics：** `esp32`, `esp32-cam`, `yolov8`, `fastapi`, `vue3`, `websocket`, `computer-vision`, `traffic-signal`, `iot`, `hardware-project`
+- **默认分支：** `main`

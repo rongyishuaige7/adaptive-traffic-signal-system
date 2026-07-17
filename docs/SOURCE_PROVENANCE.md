@@ -1,46 +1,46 @@
-# Source provenance
+# 源码来源
 
-## Authoritative-copy decision
+## 权威副本裁决
 
-| Object | Role | Evidence | Rule |
+| 对象 | 角色 | 证据 | 规则 |
 |:--|:--|:--|:--|
-| `/mnt/shared/2026项目/车流量自适应的交通信号控制系统_源码.tar.gz` | Read-only historical baseline | SHA-256 `df48d6619b8558c23917f8735d54b4e7d19cb891f112edebd42314d74ec19e09`; modified 2026-05-06 | Never edited or repacked |
-| `/home/rongyi/桌面/车流量自适应的交通信号控制系统` | Newer authoritative source | Files dated through 2026-05-16 and a later deployment guide; top-level `.git` was empty | Read-only source; not cleaned in place |
-| `/home/rongyi/桌面/adaptive-traffic-signal-system` | Clean publication candidate | Explicit copy exclusions and fresh public Git history | All public hardening occurs here |
+| `/mnt/shared/2026项目/车流量自适应的交通信号控制系统_源码.tar.gz` | 只读历史基线 | SHA-256 `df48d6619b8558c23917f8735d54b4e7d19cb891f112edebd42314d74ec19e09`；修改时间 2026-05-06 | 不编辑、不重打包 |
+| `/home/rongyi/桌面/车流量自适应的交通信号控制系统` | 较新的权威源码 | 文件日期最晚到 2026-05-16，并包含更晚的部署指南；顶层 `.git` 为空 | 只读来源，不在原地清理 |
+| `/home/rongyi/桌面/adaptive-traffic-signal-system` | 干净公开候选 | 使用明确复制排除项和全新公开 Git 历史 | 所有公开加固只在此目录实施 |
 
-A similarly named `/home/rongyi/桌面/基于esp32s3交通摄像` project is a different ESP32-S3 dual-board project and was not merged.
+名称相近的 `/home/rongyi/桌面/基于esp32s3交通摄像` 是另一个 ESP32-S3 双板项目，没有合并到本仓库。
 
-## Merge and exclusion record
+## 合并与排除记录
 
-Included from the newer desktop source:
+从较新的桌面源码纳入：
 
-- FastAPI backend, Vue 3 frontend and both firmware projects;
-- protocol and source-derived wiring information;
-- package lock and PlatformIO dependency declarations.
+- FastAPI 后端、Vue 3 前端与两个固件项目；
+- 协议及从源码整理的接线信息；
+- package lock 与 PlatformIO 依赖声明。
 
-Added only from the historical archive after review:
+仅从历史归档审查后纳入：
 
-- `simulator/fake_cam.py` and `simulator/fake_mcu.py`;
-- the empty `samples/.gitkeep` placeholder.
+- `simulator/fake_cam.py` 与 `simulator/fake_mcu.py`；
+- 空的 `samples/.gitkeep` 占位文件。
 
-Excluded before the first commit:
+首次提交前排除：
 
-- the empty `.git/` directory and all editor configuration;
-- `backend/.env`, which contained historical camera addresses;
-- all model weights, including the approximately 6.5 MB nano and 87.8 MB large weights;
-- `frontend/node_modules/`, `frontend/dist/`, Python caches and bytecode;
-- any historical Wi-Fi credentials present in the archive firmware;
-- generated PlatformIO output and private static-address configuration.
+- 空的 `.git/` 目录和全部编辑器配置；
+- 含历史摄像头地址的 `backend/.env`；
+- 全部模型权重，包括约 6.5 MB 的 nano 权重和 87.8 MB 的 large 权重；
+- `frontend/node_modules/`、`frontend/dist/`、Python 缓存与字节码；
+- 历史归档固件中的 Wi-Fi 凭据；
+- 生成的 PlatformIO 产物与私有静态地址配置。
 
-## Public hardening changes
+## 公开加固
 
-- loopback backend, simulator and CORS defaults;
-- local-only environment/build configuration for credentials and real LAN endpoints;
-- DHCP camera firmware in the public matrix;
-- no model weights committed;
-- narrow process liveness and observed frame/client facts rather than an overall `ok` state;
-- visible frontend distinction between UI WebSocket connectivity, device client count and stream freshness;
-- invalid video directions fail closed;
-- tests for timing bounds, counting, status semantics, simulated images and WebSocket counts.
+- 默认后端、模拟器与 CORS 只允许本机；
+- 凭据与真实局域网端点只存在于本地构建配置；
+- 公开矩阵中的摄像头固件默认使用 DHCP；
+- 不提交模型权重；
+- 用窄口径的进程存活、视频帧与客户端连接事实替代全局 `ok` 状态；
+- 前端明确区分 UI WebSocket、设备客户端数量与视频流新鲜度；
+- 非法视频方向拒绝处理；
+- 补充配时边界、计数、状态语义、合成图像和 WebSocket 数量测试。
 
-These changes are source/build verified. They do not establish present-day five-board hardware behavior or real-road suitability.
+以上变更已经源码与构建验证，但不能证明当前五板硬件行为或真实道路适用性。

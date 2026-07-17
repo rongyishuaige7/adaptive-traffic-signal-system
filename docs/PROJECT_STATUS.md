@@ -1,26 +1,26 @@
-# Project status
+# 项目状态
 
-> Status date: 2026-07-17
+> 状态日期：2026-07-17
 
-| Layer | Current evidence | Not established |
+| 层级 | 当前证据 | 尚未证明 |
 |:--|:--|:--|
-| Source | Source-confirmed; provenance and exclusions documented | No claim that the original working directory was release-ready |
-| Backend | Hardware-free contract tests passed | YOLO accuracy, four-camera throughput and retained-PC runtime not measured |
-| Frontend | Vue 3 production build passed | No current browser/real-stream visual smoke |
-| ESP32-CAM | N/S/E/W PlatformIO builds passed | Current four camera boards not flashed or streamed in this publication pass |
-| ESP32 main | PlatformIO build passed | Current 12 LEDs, TCA9548A and four OLEDs not re-tested |
-| Simulator | Synthetic JPEG and terminal-render contracts passed | Simulation is not hardware evidence |
-| Hardware | Wiring can be traced to current source | Current five-board and end-to-end hardware re-test not run |
+| 源码 | 权威源码、来源与排除项已确认 | 不声称原工作目录本身已达到发布标准 |
+| 后端 | 不依赖硬件的契约测试通过 | 未测 YOLO 准确率、四路吞吐或留存电脑的长期运行 |
+| 前端 | Vue 3 生产构建通过 | 未做当前浏览器与真实视频流视觉冒烟 |
+| ESP32-CAM | 东南西北四个 PlatformIO 构建通过 | 本轮发布未重新烧录或推流 4 块摄像头 |
+| ESP32 主控 | PlatformIO 构建通过 | 当前 12 路灯光、TCA9548A 与 4 块 OLED 未重新复测 |
+| 模拟器 | 合成 JPEG 与终端渲染契约通过 | 模拟器不是硬件证据 |
+| 硬件 | 当前接线可从源码追溯 | 当前五板硬件与端到端链路尚未重新真机复测 |
 
-Canonical summary:
+规范状态摘要：
 
 ```text
-Source-confirmed
-Backend tests passed
-Frontend build-verified
-Four ESP32-CAM direction builds and ESP32 main build-verified
-Simulator contract-tested
-Current five-board and end-to-end hardware re-test not run
+源码已确认
+后端测试通过
+前端构建通过
+东南西北四路 ESP32-CAM 与主控 ESP32 固件构建通过
+模拟器契约测试通过
+当前五板硬件与端到端链路尚未重新真机复测
 ```
 
-Unsupported labels include production traffic control, road-safe, traffic optimization verified, vehicle-detection accuracy verified, four cameras online, controller online, real-time guaranteed and current hardware verified.
+不应使用的状态包括：生产交通控制、道路安全已验证、交通优化已验证、车辆检测准确率已验证、四路摄像头在线、控制器在线、实时性有保证和当前硬件已验证。

@@ -1,18 +1,18 @@
-# WebSocket and status contracts
+# WebSocket 与状态契约
 
 ## UI WebSocket
 
-- Endpoint: `/ws/ui`
-- Server to UI: repeated `state` JSON payloads
-- Client messages are ignored by the current backend.
+- 端点：`/ws/ui`
+- 服务端到 UI：重复发送 `state` JSON
+- 当前后端忽略客户端消息
 
-## Device WebSocket
+## 设备 WebSocket
 
-- Endpoint: `/ws/device`
-- Server to device: the same repeated `state` payload
-- Device to server: current firmware sends heartbeat JSON for debugging; it is not used as an authenticated ACK.
+- 端点：`/ws/device`
+- 服务端到设备：发送相同的 `state` JSON
+- 设备到服务端：当前固件会发送心跳 JSON 供调试，但不会被当作已认证 ACK
 
-Example state:
+状态示例：
 
 ```json
 {
@@ -29,16 +29,16 @@ Example state:
 }
 ```
 
-`ws_clients.device > 0` means one or more WebSocket connections exist. It does not prove client identity, an ESP32 booted correctly, JSON was applied, LEDs changed, OLEDs updated or a safe signal state exists.
+`ws_clients.device > 0` 只表示存在一个或多个 WebSocket 连接；它不能证明客户端身份、ESP32 已正确启动、JSON 已执行、LED 已变化、OLED 已更新或系统处于安全信号状态。
 
-## HTTP facts
+## HTTP 事实
 
-| Endpoint | Exact meaning |
+| 端点 | 准确含义 |
 |:--|:--|
-| `GET /health` | FastAPI process liveness response only |
-| `GET /api/status` | Current in-process FSM payload and observed counts |
-| `GET /api/runtime` | Configuration switches, per-direction recent-frame facts and WebSocket connection counts |
-| `GET /api/traffic` | Latest in-memory per-direction counter snapshots |
-| `GET /api/video/{N,S,E,W}.mjpg` | Annotated frame stream or an explicit waiting placeholder |
+| `GET /health` | 只表示 FastAPI 进程存活并响应 |
+| `GET /api/status` | 当前进程内状态机载荷与已观察计数 |
+| `GET /api/runtime` | 配置开关、各方向近期视频帧事实与 WebSocket 连接数量 |
+| `GET /api/traffic` | 各方向最新的内存计数快照 |
+| `GET /api/video/{N,S,E,W}.mjpg` | 标注视频流，或明确的等待占位图 |
 
-There is no authentication, TLS, device identity, message signature, replay protection, command acknowledgement or physical feedback in this teaching protocol.
+本教学协议没有认证、TLS、设备身份、消息签名、防重放、命令确认或实体反馈。

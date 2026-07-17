@@ -1,47 +1,47 @@
-# Verification
+# 验证记录
 
-## One-command local gate
+## 一键本地门禁
 
 ```bash
 bash scripts/verify.sh
 ```
 
-The gate creates an isolated source copy, then checks:
+门禁会创建隔离源码副本，然后检查：
 
-1. credential and private-LAN patterns;
-2. required files, generated-output exclusions, file size, SVG/BOM and claim contracts;
-3. Python compile and backend/simulator tests without model downloads or hardware;
-4. a Vue 3 production build using `npm ci`;
-5. four ESP32-CAM direction firmware builds and one ESP32 main build with non-secret compile-time test values.
+1. 凭据与私有局域网模式；
+2. 必需文件、生成物排除、文件大小、SVG / BOM 与事实声明契约；
+3. 不下载模型、不连接硬件的 Python 语法、后端与模拟器测试；
+4. 使用 `npm ci` 完成 Vue 3 生产构建；
+5. 使用非敏感编译期测试值构建东南西北四路 ESP32-CAM 和一个主控 ESP32 固件。
 
-## Current verified result
+## 当前已验证结果
 
-On 2026-07-17 the candidate passed:
+2026-07-17，公开候选通过：
 
 ```text
-Secret scan: PASS
-Repository check: PASS
-Python pytest: 11 passed
-Vue production build: PASS
-ESP32-CAM N/S/E/W builds: PASS
-ESP32 main build: PASS
+敏感信息扫描：通过
+仓库检查：通过
+Python pytest：11 项通过
+Vue 生产构建：通过
+ESP32-CAM 东/南/西/北构建：通过
+ESP32 主控构建：通过
 ```
 
-This is build and contract evidence. CI does not download YOLO model weights, run inference, connect to real camera streams, flash an ESP32, inspect LEDs/OLEDs or control a physical intersection model.
+这些只是构建和契约证据。CI 不下载 YOLO 权重、不运行推理、不连接真实摄像头流、不烧录 ESP32、不检查 LED / OLED，也不控制实体路口模型。
 
-## Current hardware re-test checklist
+## 当前真机复测清单
 
-Bind any future result to an exact commit and date, then record:
+未来的每项结果都应绑定精确提交与日期，并记录：
 
-1. the exact main ESP32, four ESP32-CAM boards and camera sensor models;
-2. power supplies, boot stability and real wiring against `HARDWARE.md`;
-3. four independent camera boots, addresses and sustained MJPEG streams;
-4. backend model setup and all four stream-freshness facts;
-5. detection and tracking on controlled test clips, with a separate accuracy evaluation if accuracy is claimed;
-6. crossing counts for N/S/E/W and timing calculation inputs/outputs;
-7. WebSocket state reaching the physical controller;
-8. each of 12 LEDs and four OLEDs matching the commanded phases;
-9. WebSocket interruption causing an observable all-red prototype state;
-10. recovery, frame loss, latency, stability and any untested item.
+1. 主控 ESP32、4 块 ESP32-CAM 与摄像头传感器的精确型号；
+2. 电源、启动稳定性以及与 `HARDWARE.md` 一致的真实接线；
+3. 4 块摄像头独立启动、地址获取与持续 MJPEG 推流；
+4. 后端模型配置与 4 个方向的视频流新鲜度事实；
+5. 受控测试片段上的检测与跟踪；若要声明准确率，须另做准确率评估；
+6. 东南西北穿线计数及配时算法的输入与输出；
+7. WebSocket 状态到达实体控制器；
+8. 12 路 LED 与 4 块 OLED 是否匹配命令相位；
+9. WebSocket 中断是否使实体原型进入可观察的全红状态；
+10. 恢复、丢帧、延迟、稳定性及全部未测项目。
 
-Do not turn a simulator run or an Actions build into current hardware or road-safety evidence.
+不能把模拟器运行或 Actions 构建升级为当前硬件或道路安全证据。

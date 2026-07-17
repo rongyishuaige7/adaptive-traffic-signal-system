@@ -1,44 +1,44 @@
-# Hardware and wiring boundary
+# 硬件与接线边界
 
-This is a **source-derived connection guide**, not an EDA schematic and not proof that the retained five-board assembly was re-tested on the current public commit.
+本文档是**根据当前源码整理的接线指南**，不是 EDA 原理图，也不能证明留存的五板实物已针对当前公开提交完成复测。
 
-## ESP32 main controller
+## ESP32 主控制器
 
-| Direction | Red | Yellow | Green |
+| 方向 | 红灯 | 黄灯 | 绿灯 |
 |:--|:--|:--|:--|
-| North | GPIO13 | GPIO14 | GPIO27 |
-| South | GPIO16 | GPIO17 | GPIO18 |
-| East | GPIO19 | GPIO21 | GPIO22 |
-| West | GPIO23 | GPIO25 | GPIO26 |
+| 北 | GPIO13 | GPIO14 | GPIO27 |
+| 南 | GPIO16 | GPIO17 | GPIO18 |
+| 东 | GPIO19 | GPIO21 | GPIO22 |
+| 西 | GPIO23 | GPIO25 | GPIO26 |
 
-The source assumes four three-color modules with built-in current limiting. Confirm the real module voltage, polarity and resistor values before wiring. GPIO14 is a strapping pin. GPIO16/17 are unavailable on some ESP32-WROVER boards with PSRAM, so the exact controller module must be physically confirmed.
+源码假定使用 4 个自带限流的三色灯模块。接线前必须确认真实模块的工作电压、极性和电阻值。GPIO14 是启动绑带引脚；部分带 PSRAM 的 ESP32-WROVER 板无法使用 GPIO16/17，因此必须根据实物确认主控模块的精确型号。
 
-## Four OLEDs through TCA9548A
+## 通过 TCA9548A 连接 4 块 OLED
 
-| Function | Main ESP32 / multiplexer |
+| 功能 | 主控 ESP32 / 多路复用器 |
 |:--|:--|
 | SDA | GPIO4 |
 | SCL | GPIO5 |
-| TCA9548A address | `0x70`, A0/A1/A2 low |
-| North OLED | channel 0, SSD1306 `0x3C` |
-| South OLED | channel 1, SSD1306 `0x3C` |
-| East OLED | channel 2, SSD1306 `0x3C` |
-| West OLED | channel 3, SSD1306 `0x3C` |
+| TCA9548A 地址 | `0x70`，A0/A1/A2 接低电平 |
+| 北向 OLED | 通道 0，SSD1306 `0x3C` |
+| 南向 OLED | 通道 1，SSD1306 `0x3C` |
+| 东向 OLED | 通道 2，SSD1306 `0x3C` |
+| 西向 OLED | 通道 3，SSD1306 `0x3C` |
 
-## ESP32-CAM nodes
+## ESP32-CAM 节点
 
-The firmware uses the AI Thinker camera pin map and provides `/`, `/jpg` and `/stream`. N/S/E/W builds differ only by `CAM_DIRECTION`; DHCP is the public default. Wi-Fi and optional static addressing are local, ignored configuration.
+固件使用 AI Thinker 摄像头引脚定义，并提供 `/`、`/jpg` 和 `/stream`。东南西北四个构建仅 `CAM_DIRECTION` 不同；公开默认使用 DHCP，Wi-Fi 与可选静态地址均属于本地忽略配置。
 
-Use a stable supply appropriate for the exact ESP32-CAM boards; the historical guide recommends 5 V / 1 A for each node. All control/display modules share a common reference ground where their power topology requires it.
+请为精确板型提供稳定电源；历史指南建议每个节点使用 5 V / 1 A。控制和显示模块按其供电拓扑要求共用参考地。
 
-## Confirm before upgrading the evidence status
+## 提升证据状态前必须确认
 
-- exact ESP32 main and four ESP32-CAM module revisions;
-- exact camera sensors;
-- display and multiplexer modules;
-- traffic-light module voltage, polarity and resistor values;
-- actual power rails and common-ground topology;
-- current wiring against every GPIO above;
-- whether the all-red disconnect behavior is observable on real LEDs.
+- 主控 ESP32 与 4 块 ESP32-CAM 的精确模块版本；
+- 摄像头传感器型号；
+- 显示屏和多路复用器模块；
+- 交通灯模块的电压、极性和电阻值；
+- 实际供电轨与共地拓扑；
+- 当前实物接线是否逐项匹配上述 GPIO；
+- WebSocket 断开后的全红行为是否真实反映在实体灯上。
 
-See [the wiring boundary diagram](hardware/wiring-diagram.svg) and [BOM](hardware/BOM.csv).
+另见[接线边界图](hardware/wiring-diagram.svg)和 [BOM](hardware/BOM.csv)。

@@ -1,69 +1,69 @@
-# Adaptive Traffic Signal System
+# 车流量自适应交通信号控制系统
 
-An educational tabletop prototype that combines four ESP32-CAM MJPEG streams, YOLOv8 tracking and vehicle counting, a FastAPI/Vue 3 workstation, and an ESP32 traffic-light controller.
+一个面向教学与本科毕业设计参考的桌面十字路口原型：四路 ESP32-CAM 提供 MJPEG 视频，后端使用 YOLOv8 / ByteTrack 跟踪并统计车流，FastAPI 与 Vue 3 工作台展示运行事实，主控 ESP32 驱动 12 路交通灯和 4 块 OLED。
 
 [![Validate](https://github.com/rongyishuaige7/adaptive-traffic-signal-system/actions/workflows/validate.yml/badge.svg)](https://github.com/rongyishuaige7/adaptive-traffic-signal-system/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-f97316.svg)](LICENSE)
 
-> **Evidence scope, 2026-07-17:** Source-confirmed · Backend tests passed · Frontend build-verified · Four ESP32-CAM direction builds and ESP32 main build-verified · Simulator contract-tested · Current five-board and end-to-end hardware re-test not run.
+> **证据范围（2026-07-17）：** 源码已确认 · 后端测试通过 · 前端构建通过 · 东南西北四路 ESP32-CAM 与主控 ESP32 固件构建通过 · 模拟器契约测试通过 · 当前五板硬件与端到端链路尚未重新真机复测。
 
-This repository shows how a multi-board computer-vision prototype fits together. It is **not road infrastructure, a certified signal controller or evidence of traffic optimization/detection accuracy**.
+本仓库用于展示多板计算机视觉教学原型如何组成闭环。它**不是道路基础设施、认证交通信号控制器，也不证明交通优化效果或车辆检测准确率**。
 
-## What the prototype covers
+## 项目能力
 
-- four N/S/E/W AI Thinker ESP32-CAM firmware builds with DHCP and MJPEG endpoints;
-- four backend workers for YOLOv8/ByteTrack vehicle tracking and virtual-line counts;
-- a two-phase N/S and E/W timing FSM with bounded linear green-time calculation;
-- FastAPI status, MJPEG re-stream and UI/device WebSockets;
-- a Vue 3 dashboard that separates UI connection, device-client count and recent-frame facts;
-- an ESP32 main controller for 12 light outputs and four SSD1306 displays through TCA9548A;
-- four synthetic MJPEG sources and a terminal MCU simulator for hardware-free teaching;
-- source-derived BOM and wiring boundary.
+- 东、南、西、北四路 AI Thinker ESP32-CAM 固件，使用 DHCP 与 MJPEG 端点；
+- 四路后端工作线程，基于 YOLOv8 / ByteTrack 跟踪车辆并统计虚拟线穿越次数；
+- 南北、东西两相位状态机，以有界线性公式计算下一轮绿灯时间；
+- FastAPI 状态接口、MJPEG 转发以及 UI / 设备 WebSocket；
+- Vue 3 工作台分别展示 UI 连接、设备客户端数量和近期视频帧事实；
+- 主控 ESP32 驱动 12 路灯光，并通过 TCA9548A 连接 4 块 SSD1306 OLED；
+- 四路合成 MJPEG 源和终端主控模拟器，便于在无硬件时学习与验证；
+- 从当前源码整理的 BOM 与接线边界。
 
-## Architecture
-
-```text
-ESP32-CAM N/S/E/W ── MJPEG ──┐
-                              ▼
-                    FastAPI + YOLOv8/ByteTrack
-                              │
-                 ┌────────────┴────────────┐
-                 │ UI WebSocket + MJPEG    │ device WebSocket
-                 ▼                         ▼
-              Vue 3 UI            ESP32 main controller
-                                      │          │
-                                 12 LED GPIO   TCA9548A
-                                                  │
-                                           4 × SSD1306
-```
-
-## Repository layout
+## 系统架构
 
 ```text
-backend/                 FastAPI, counting, timing and WebSocket service
-frontend/                Vue 3 / Element Plus / ECharts dashboard
-firmware/esp32_cam/      N/S/E/W AI Thinker ESP32-CAM builds
-firmware/esp32_main/     12-light + four-OLED ESP32 controller
-simulator/               Local fake camera and fake MCU tools
-tests/                   Hardware-free backend/simulator contracts
-hardware/                Source-derived BOM and wiring diagram
-docs/                    Setup, status, verification and provenance
-scripts/                 Secret, repository and full verification gates
+ESP32-CAM 东/南/西/北 ── MJPEG ──┐
+                                  ▼
+                       FastAPI + YOLOv8/ByteTrack
+                                  │
+                    ┌─────────────┴────────────┐
+                    │ UI WebSocket + MJPEG     │ 设备 WebSocket
+                    ▼                          ▼
+                 Vue 3 界面              ESP32 主控制器
+                                              │          │
+                                         12 路灯光    TCA9548A
+                                                         │
+                                                  4 × SSD1306
 ```
 
-## Quick verification
+## 仓库结构
 
-The one-command gate avoids real credentials, model downloads and hardware:
+```text
+backend/                 FastAPI、车流统计、配时与 WebSocket 服务
+frontend/                Vue 3 / Element Plus / ECharts 工作台
+firmware/esp32_cam/      东/南/西/北 AI Thinker ESP32-CAM 固件
+firmware/esp32_main/     12 路灯光 + 4 块 OLED 的 ESP32 主控固件
+simulator/               本地模拟摄像头与模拟主控工具
+tests/                   不依赖硬件的后端与模拟器契约测试
+hardware/                从源码整理的 BOM 与接线边界图
+docs/                    部署、状态、验证与来源说明
+scripts/                 敏感信息、仓库结构与完整验证门禁
+```
+
+## 快速验证
+
+下面的一键门禁不使用真实凭据、不下载模型，也不连接硬件：
 
 ```bash
 bash scripts/verify.sh
 ```
 
-It runs the secret/repository checks, Python tests, a clean Vue production build, N/S/E/W ESP32-CAM builds and the ESP32 main build. See [VERIFICATION.md](docs/VERIFICATION.md) for exact evidence boundaries.
+它会依次执行敏感信息与仓库检查、Python 测试、Vue 生产构建、东南西北四路 ESP32-CAM 构建和主控 ESP32 构建。准确的证据边界见[验证记录](docs/VERIFICATION.md)。
 
-## Local simulator
+## 本地模拟
 
-Create a virtual environment and install development dependencies:
+创建虚拟环境并安装开发依赖：
 
 ```bash
 python3 -m venv .venv
@@ -72,66 +72,66 @@ pip install -r backend/requirements-dev.txt
 python simulator/fake_cam.py
 ```
 
-The default camera URLs are loopback ports `8181`–`8184`. In other terminals, start the backend from `backend/` and the frontend from `frontend/`:
+默认模拟摄像头使用本机 `8181`–`8184` 端口。再分别从 `backend/` 和 `frontend/` 启动后端与前端：
 
 ```bash
-# backend terminal
+# 后端终端
 cd backend
 cp .env.example .env
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 
-# frontend terminal
+# 前端终端
 cd frontend
 npm ci
 npm run dev
 ```
 
-Optional terminal device simulation:
+可选的终端设备模拟器：
 
 ```bash
 python simulator/fake_mcu.py --uri ws://127.0.0.1:8000/ws/device
 ```
 
-Synthetic frames prove only simulator/transport behavior. The full video worker also needs a locally obtained YOLO model; see [MODEL_SETUP.md](docs/MODEL_SETUP.md).
+合成画面只能证明模拟器和传输链路行为，不能证明车辆检测或真实硬件。完整视频工作线程还需要自行获取 YOLO 模型，见[模型配置与许可边界](docs/MODEL_SETUP.md)。
 
-## Hardware configuration
+## 硬件配置
 
-Public firmware contains no real Wi-Fi credentials or private-LAN addresses. It compiles with empty/non-routable test values, then fails closed at runtime until local configuration is supplied.
+公开固件不包含真实 Wi-Fi 凭据或私有局域网地址。它可以使用空值或不可路由测试值完成构建，但在本地配置就绪前会在运行时拒绝启动网络链路。
 
-- Copy the relevant `local-config.example.ini` values into an ignored local PlatformIO configuration or environment build flags.
-- Keep ESP32-CAM on DHCP unless you have a documented local addressing plan.
-- Set the main controller's `PC_HOST` to the actual backend host only in local configuration.
-- Confirm the exact board revisions, voltages, current limiting, GPIO map and common-ground topology against [HARDWARE.md](HARDWARE.md).
+- 将相应 `local-config.example.ini` 中的值复制到被忽略的本地 PlatformIO 配置，或通过环境构建参数提供；
+- 除非已有明确的本地地址规划，否则 ESP32-CAM 保持 DHCP；
+- 主控制器的 `PC_HOST` 只在本地配置中填写真实后端地址；
+- 接线前按 [HARDWARE.md](HARDWARE.md) 核对精确板型、电压、限流、GPIO 和共地拓扑。
 
-## Accurate runtime semantics
+## 准确的运行状态语义
 
-- `GET /health` means only **the FastAPI process responded**.
-- `GET /api/runtime` reports whether each direction has received a recent processed frame and how many UI/device WebSocket clients are connected.
-- A device client count is not authenticated device identity or physical light feedback.
-- A placeholder image remains explicitly `no fresh frame`; it is never counted as a healthy camera.
-- The ESP32 main source requests all-red after WebSocket disconnect, but the current public commit has not been re-tested on the retained lights.
+- `GET /health` 只表示 **FastAPI 进程已响应**；
+- `GET /api/runtime` 报告每个方向是否收到近期处理帧，以及 UI / 设备 WebSocket 客户端数量；
+- 设备客户端数量不代表已认证设备身份，也不证明实体灯光状态；
+- 占位图始终明确表示 `no fresh frame`，不会被计为健康摄像头；
+- 主控 ESP32 源码会在 WebSocket 断开后请求全红，但当前公开提交尚未在留存灯组上重新验证。
 
-## Known limits
+## 已知限制
 
-- Current four ESP32-CAM boards, main ESP32, 12 LEDs, TCA9548A and four OLEDs have not been re-tested end to end.
-- No real product photo, demo video, current UI screenshot or EDA/manufacturing file is included.
-- No YOLO model weight is distributed; upstream licensing applies.
-- No current dataset, precision/recall, count error, latency, frame-loss or stability evaluation exists.
-- HTTP, MJPEG and WebSocket endpoints have no authentication or TLS. Loopback is the default; real-hardware LAN use must be explicit and isolated.
-- The device protocol has no authenticated identity, command ACK, physical light feedback, hardware interlock or conflict monitor.
-- This project must never control real road signals.
+- 当前 4 块 ESP32-CAM、主控 ESP32、12 路灯光、TCA9548A 和 4 块 OLED 尚未重新完成端到端真机复测；
+- 当前未公开真实产品照片、演示视频、界面截图或 EDA / 制造文件；
+- 不分发 YOLO 模型权重，使用与分发需遵守上游许可；
+- 当前没有数据集、精确率 / 召回率、计数误差、延迟、丢帧或稳定性评估；
+- HTTP、MJPEG 与 WebSocket 均无认证和 TLS；默认仅绑定本机，真机局域网联调必须显式启用并隔离；
+- 设备协议没有认证身份、命令 ACK、实体灯光反馈、硬件互锁或冲突监测；
+- 本项目绝不能用于控制真实道路信号灯。
 
-## Documentation
+## 文档
 
-- [Hardware and wiring boundary](HARDWARE.md)
-- [Deployment and simulation](docs/DEPLOYMENT.md)
-- [Model setup and license boundary](docs/MODEL_SETUP.md)
-- [WebSocket protocol](docs/PROTOCOL.md)
-- [Project status](docs/PROJECT_STATUS.md)
-- [Source provenance](docs/SOURCE_PROVENANCE.md)
-- [Verification](docs/VERIFICATION.md)
-- [Third-party notices](THIRD_PARTY_NOTICES.md)
+- [硬件与接线边界](HARDWARE.md)
+- [部署与模拟](docs/DEPLOYMENT.md)
+- [模型配置与许可边界](docs/MODEL_SETUP.md)
+- [WebSocket 与状态协议](docs/PROTOCOL.md)
+- [项目状态](docs/PROJECT_STATUS.md)
+- [源码来源](docs/SOURCE_PROVENANCE.md)
+- [验证记录](docs/VERIFICATION.md)
+- [第三方声明](THIRD_PARTY_NOTICES.md)
 
-## License
+## 许可证
 
-Original repository material is available under the [MIT License](LICENSE). Dependencies and model weights retain their own terms. In particular, review the Ultralytics AGPL-3.0/Enterprise boundary in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+本仓库原创材料采用 [MIT License](LICENSE)。依赖与模型权重继续适用各自许可，尤其应在 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 中核对 Ultralytics 的 AGPL-3.0 / Enterprise 边界。

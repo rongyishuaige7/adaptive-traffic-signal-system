@@ -1,0 +1,28 @@
+:root {
+  --bg: #0d0f12;
+  --panel: #141821;
+  --text: #e8eaef;
+  --muted: #8b93a7;
+  --signal-red: #ff3b3b;
+  --signal-yellow: #ffcc33;
+  --signal-green: #2ee59d;
+  --accent: #3aa8ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+.mono {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}

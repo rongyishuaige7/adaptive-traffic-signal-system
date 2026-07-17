@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+backend/models/*.pt
+samples/*.mp4
+node_modules/
+dist/
+.vscode/
+.idea/
+*.log
+.DS_Store
+.pio/
+.pioenvs/
+local-config.ini

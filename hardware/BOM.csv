@@ -1,0 +1,11 @@
+Designator,Item,Quantity,Source-confirmed specification,Needs physical confirmation,Notes
+CAM-N..W,ESP32-CAM board,4,AI Thinker pin map in firmware,Exact module and camera sensor,One stream per direction
+CAMERA-N..W,Camera module,4,ESP32 camera JPEG stream,OV2640 or other exact sensor,Do not infer model from board name alone
+MCU,ESP32 main controller,1,PlatformIO esp32dev target,Exact module and WROOM/WROVER variant,GPIO16/17 conflict with WROVER PSRAM
+LIGHT-N..W,Three-color traffic light module,4,12 LED control signals total,Module voltage and resistor values,Source document says module includes limiting resistors
+OLED-N..W,SSD1306 OLED 128x32,4,I2C address 0x3C,Exact panel voltage and dimensions,One display per direction
+MUX,TCA9548A I2C multiplexer,1,Address 0x70 with A0/A1/A2 low,Exact breakout board,Channels 0 through 3 used
+PSU-CAM,Regulated camera supply,4,5 V and 1 A per camera recommended,Actual supply ratings,Prevent brownouts during Wi-Fi streaming
+PSU-MCU,Controller and display supply,1,Shared logic supply and common ground,Actual rating and wiring,Confirm module voltage requirements
+WIRE,Jumpers and common ground,as needed,GPIO and I2C connections in HARDWARE.md,Wire gauge and connectors,Verify against retained prototype
+MODEL,Tabletop intersection model,1,Four-direction teaching scene,Dimensions and construction,Not included as a digital design asset

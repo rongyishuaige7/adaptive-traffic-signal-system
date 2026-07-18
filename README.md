@@ -9,13 +9,13 @@
 
 本仓库用于展示多板计算机视觉教学原型如何组成闭环。它**不是道路基础设施、认证交通信号控制器，也不证明交通优化效果或车辆检测准确率**。
 
-## Historical material evidence (2026-07-18 publication)
+## 历史素材证据（2026-07-18 发布）
 
-sanitized historical photo(s), sanitized historical screenshot(s), historical EDA derivative(s). See [MEDIA_EVIDENCE](docs/MEDIA_EVIDENCE.md) for dates, sanitization, omissions, and evidence limits.
+已脱敏的历史照片、历史截图和历史 EDA 衍生文件。日期、脱敏处理、未公开材料和证据边界见 [MEDIA_EVIDENCE](docs/MEDIA_EVIDENCE.md)。
 
-![Historical desktop traffic-signal teaching model, 2026-05-14](assets/photos/historical-desktop-model.jpg)
+![历史桌面交通信号教学模型，2026-05-14](assets/photos/historical-desktop-model.jpg)
 
-Historical media/EDA do not prove that the current public commit was flashed or re-tested on hardware. **Current hardware re-test not run.**
+历史照片、截图或 EDA 不证明当前公开提交已烧录或完成真机复测。**当前未进行真机复测。**
 
 
 ## 项目能力

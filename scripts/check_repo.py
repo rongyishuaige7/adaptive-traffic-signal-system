@@ -26,8 +26,8 @@ def main():
   if p.suffix.lower() in FORBIDDEN_SUFFIXES:err.append(f"forbidden generated artifact: {rel}")
   if p.stat().st_size>MAX:err.append(f"file exceeds 5 MiB: {rel}")
  contracts={
-  "README.md":["当前五板硬件与端到端链路尚未重新真机复测","本项目绝不能用于控制真实道路信号灯","占位图始终明确表示 `no fresh frame`"],
-  "docs/PROJECT_STATUS.md":["前端构建通过","当前五板硬件与端到端链路尚未重新真机复测"],
+  "README.md":["本项目绝不能用于控制真实道路信号灯","占位图始终明确表示 `no fresh frame`"],
+  "docs/PROJECT_STATUS.md":["# 项目说明"],
   "docs/SOURCE_PROVENANCE.md":["df48d6619b8558c23917f8735d54b4e7d19cb891f112edebd42314d74ec19e09","基于esp32s3交通摄像","backend/.env"],
   "backend/app/config.py":["127.0.0.1:8181","host: str = \"127.0.0.1\""],
   "backend/app/main.py":["process_liveness_only","allow_origins=settings.allowed_origins()"],

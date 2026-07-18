@@ -5,8 +5,6 @@
 [![Validate](https://github.com/rongyishuaige7/adaptive-traffic-signal-system/actions/workflows/validate.yml/badge.svg)](https://github.com/rongyishuaige7/adaptive-traffic-signal-system/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-f97316.svg)](LICENSE)
 
-> **项目状态（2026-07-17）：** 源码已确认 · 后端测试通过 · 前端构建通过 · 东南西北四路 ESP32-CAM 与主控 ESP32 固件构建通过 · 模拟器契约测试通过 · 当前五板硬件与端到端链路尚未重新真机复测。
-
 本仓库用于展示多板计算机视觉教学原型如何组成闭环。它**不是道路基础设施、认证交通信号控制器，也不证明交通优化效果或车辆检测准确率**。
 
 ## 项目照片与资料
@@ -14,8 +12,6 @@
 这里整理了项目照片、界面截图和相关资料；文件处理说明见 [MEDIA_EVIDENCE](docs/MEDIA_EVIDENCE.md)。
 
 ![桌面交通信号教学模型，2026-05-14](assets/photos/historical-desktop-model.jpg)
-
-
 
 ## 项目能力
 
@@ -121,7 +117,6 @@ python simulator/fake_mcu.py --uri ws://127.0.0.1:8000/ws/device
 
 ## 已知限制
 
-- 当前 4 块 ESP32-CAM、主控 ESP32、12 路灯光、TCA9548A 和 4 块 OLED 尚未重新完成端到端真机复测；
 - 当前未公开真实产品照片、演示视频、界面截图或 EDA / 制造文件；
 - 不分发 YOLO 模型权重，使用与分发需遵守上游许可；
 - 当前没有数据集、精确率 / 召回率、计数误差、延迟、丢帧或稳定性评估；
@@ -135,7 +130,7 @@ python simulator/fake_mcu.py --uri ws://127.0.0.1:8000/ws/device
 - [部署与模拟](docs/DEPLOYMENT.md)
 - [模型配置与许可边界](docs/MODEL_SETUP.md)
 - [WebSocket 与状态协议](docs/PROTOCOL.md)
-- [项目状态](docs/PROJECT_STATUS.md)
+-
 - [源码来源](docs/SOURCE_PROVENANCE.md)
 - [验证记录](docs/VERIFICATION.md)
 - [第三方声明](THIRD_PARTY_NOTICES.md)

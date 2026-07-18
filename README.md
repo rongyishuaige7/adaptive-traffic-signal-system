@@ -5,17 +5,16 @@
 [![Validate](https://github.com/rongyishuaige7/adaptive-traffic-signal-system/actions/workflows/validate.yml/badge.svg)](https://github.com/rongyishuaige7/adaptive-traffic-signal-system/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-f97316.svg)](LICENSE)
 
-> **证据范围（2026-07-17）：** 源码已确认 · 后端测试通过 · 前端构建通过 · 东南西北四路 ESP32-CAM 与主控 ESP32 固件构建通过 · 模拟器契约测试通过 · 当前五板硬件与端到端链路尚未重新真机复测。
+> **项目状态（2026-07-17）：** 源码已确认 · 后端测试通过 · 前端构建通过 · 东南西北四路 ESP32-CAM 与主控 ESP32 固件构建通过 · 模拟器契约测试通过 · 当前五板硬件与端到端链路尚未重新真机复测。
 
 本仓库用于展示多板计算机视觉教学原型如何组成闭环。它**不是道路基础设施、认证交通信号控制器，也不证明交通优化效果或车辆检测准确率**。
 
-## 历史素材证据（2026-07-18 发布）
+## 项目照片与资料
 
-已脱敏的历史照片、历史截图和历史 EDA 衍生文件。日期、脱敏处理、未公开材料和证据边界见 [MEDIA_EVIDENCE](docs/MEDIA_EVIDENCE.md)。
+这里整理了项目照片、界面截图和相关资料；文件处理说明见 [MEDIA_EVIDENCE](docs/MEDIA_EVIDENCE.md)。
 
-![历史桌面交通信号教学模型，2026-05-14](assets/photos/historical-desktop-model.jpg)
+![桌面交通信号教学模型，2026-05-14](assets/photos/historical-desktop-model.jpg)
 
-历史照片、截图或 EDA 不证明当前公开提交已烧录或完成真机复测。**当前未进行真机复测。**
 
 
 ## 项目能力

@@ -24,3 +24,9 @@
 ```
 
 不应使用的状态包括：生产交通控制、道路安全已验证、交通优化已验证、车辆检测准确率已验证、四路摄像头在线、控制器在线、实时性有保证和当前硬件已验证。
+
+## Historical media and EDA added on 2026-07-18
+
+sanitized historical photo(s), sanitized historical screenshot(s), historical EDA derivative(s). See [MEDIA_EVIDENCE](MEDIA_EVIDENCE.md) for dates, sanitization, omissions, and evidence limits.
+
+This publication update adds historical evidence only. Current hardware re-test not run.

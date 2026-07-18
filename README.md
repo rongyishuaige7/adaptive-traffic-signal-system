@@ -9,6 +9,15 @@
 
 本仓库用于展示多板计算机视觉教学原型如何组成闭环。它**不是道路基础设施、认证交通信号控制器，也不证明交通优化效果或车辆检测准确率**。
 
+## Historical material evidence (2026-07-18 publication)
+
+sanitized historical photo(s), sanitized historical screenshot(s), historical EDA derivative(s). See [MEDIA_EVIDENCE](docs/MEDIA_EVIDENCE.md) for dates, sanitization, omissions, and evidence limits.
+
+![Historical desktop traffic-signal teaching model, 2026-05-14](assets/photos/historical-desktop-model.jpg)
+
+Historical media/EDA do not prove that the current public commit was flashed or re-tested on hardware. **Current hardware re-test not run.**
+
+
 ## 项目能力
 
 - 东、南、西、北四路 AI Thinker ESP32-CAM 固件，使用 DHCP 与 MJPEG 端点；

@@ -1,0 +1,7 @@
+name,designator,footprint,quantity,part_number,manufacturer
+DC 5.5*2.1,DC1,DC-005-20A,1,DC-005-20A,HRO
+2pin排针,"H1,H2,H3,H4",2PIN排针,4,A2541WV-9P,Changjiang Connectors
+0.91寸OLED液晶显示屏模块,"U1,U2,U3,U4",0.91寸OLED液晶显示屏模块,4,,
+WJ_TCA9548A,U5,TCA9548A,1,,
+LED交通信号灯模块,"U6,U8,U9,U10",LED交通信号灯模块,4,,
+ESP32-DevKitC,U7,ESP32-DEVKIT-C,1,ESP32-WROOM-32,Espressif Systems

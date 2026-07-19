@@ -5,9 +5,9 @@
 [![Validate](https://github.com/rongyishuaige7/adaptive-traffic-signal-system/actions/workflows/validate.yml/badge.svg)](https://github.com/rongyishuaige7/adaptive-traffic-signal-system/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-f97316.svg)](LICENSE)
 
-本仓库用于展示多板计算机视觉教学原型如何组成闭环。它**不是道路基础设施、认证交通信号控制器，也不证明交通优化效果或车辆检测准确率**。
+> **使用提示：** 本项目用于桌面教学与技术学习，不能用于控制真实道路信号灯。
 
-## 项目照片与资料
+## 项目资料
 
 这里整理了项目照片、界面截图和相关资料；文件处理说明见 [MEDIA_EVIDENCE](docs/MEDIA_EVIDENCE.md)。
 
@@ -57,13 +57,11 @@ scripts/                 敏感信息、仓库结构与完整验证门禁
 
 ## 快速验证
 
-下面的一键门禁不使用真实凭据、不下载模型，也不连接硬件：
+下面的一键门禁用于检查仓库结构与本地构建：
 
 ```bash
 bash scripts/verify.sh
 ```
-
-它会依次执行敏感信息与仓库检查、Python 测试、Vue 生产构建、东南西北四路 ESP32-CAM 构建和主控 ESP32 构建。准确的证据边界见[验证记录](docs/VERIFICATION.md)。
 
 ## 本地模拟
 
@@ -96,7 +94,7 @@ npm run dev
 python simulator/fake_mcu.py --uri ws://127.0.0.1:8000/ws/device
 ```
 
-合成画面只能证明模拟器和传输链路行为，不能证明车辆检测或真实硬件。完整视频工作线程还需要自行获取 YOLO 模型，见[模型配置与许可边界](docs/MODEL_SETUP.md)。
+完整视频工作线程还需要自行获取 YOLO 模型，见[模型配置与许可说明](docs/MODEL_SETUP.md)。
 
 ## 硬件配置
 
@@ -107,30 +105,25 @@ python simulator/fake_mcu.py --uri ws://127.0.0.1:8000/ws/device
 - 主控制器的 `PC_HOST` 只在本地配置中填写真实后端地址；
 - 接线前按 [HARDWARE.md](HARDWARE.md) 核对精确板型、电压、限流、GPIO 和共地拓扑。
 
-## 准确的运行状态语义
+## 运行说明
 
 - `GET /health` 只表示 **FastAPI 进程已响应**；
 - `GET /api/runtime` 报告每个方向是否收到近期处理帧，以及 UI / 设备 WebSocket 客户端数量；
-- 设备客户端数量不代表已认证设备身份，也不证明实体灯光状态；
 - 占位图始终明确表示 `no fresh frame`，不会被计为健康摄像头；
-- 主控 ESP32 源码会在 WebSocket 断开后请求全红，但当前公开提交尚未在留存灯组上重新验证。
 
-## 已知限制
+## 注意事项
 
-- 当前未公开真实产品照片、演示视频、界面截图或 EDA / 制造文件；
 - 不分发 YOLO 模型权重，使用与分发需遵守上游许可；
-- 当前没有数据集、精确率 / 召回率、计数误差、延迟、丢帧或稳定性评估；
 - HTTP、MJPEG 与 WebSocket 均无认证和 TLS；默认仅绑定本机，真机局域网联调必须显式启用并隔离；
 - 设备协议没有认证身份、命令 ACK、实体灯光反馈、硬件互锁或冲突监测；
 - 本项目绝不能用于控制真实道路信号灯。
 
 ## 文档
 
-- [硬件与接线边界](HARDWARE.md)
+- [硬件与接线说明](HARDWARE.md)
 - [部署与模拟](docs/DEPLOYMENT.md)
-- [模型配置与许可边界](docs/MODEL_SETUP.md)
+- [模型配置与许可说明](docs/MODEL_SETUP.md)
 - [WebSocket 与状态协议](docs/PROTOCOL.md)
--
 - [源码来源](docs/SOURCE_PROVENANCE.md)
 - [验证记录](docs/VERIFICATION.md)
 - [第三方声明](THIRD_PARTY_NOTICES.md)
